@@ -3,6 +3,7 @@ import sys
 
 from stats import CountWords
 from stats import CharCount
+from stats import PrintBookReport
 
 def FileExists(filepath):
     my_file = Path(filepath)
@@ -29,9 +30,11 @@ def main():
     
     s = OpenStringFile(filepath)
     countMsg = "Found [{n}] total words"
-    print(countMsg.format(n = CountWords(s)))
+    #print(countMsg.format(n = CountWords(s)))
 
-    print(CharCount(s))
+    #CharCount(s)
+    PrintBookReport(s)
+    #print(CharCount(s))
     
     #print(s)
     

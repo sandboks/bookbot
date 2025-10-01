@@ -10,5 +10,34 @@ def CountWords(s):
 #Convert any character to lowercase using the .lower() method, we don't want duplicates.
 #Use a dictionary of String -> Integer. The returned dictionary should look something like this:
 def CharCount(s):
-    return 0
+    s = s.upper()
+    charDict = {}
+    for c in s:
+        # skip, if the character is non-alphabet
+        if not (c.isalpha()):
+            continue
+        
+        if not (c in charDict):
+            charDict[c] = 1
+        else:
+            charDict[c] += 1
+    
+    charDict = dict(sorted(charDict.items(), key=lambda item: item[1], reverse=True))
+    return charDict
+    #print (charDict)
 
+def PrintBookReport(s):
+    
+    lines = [
+        "============ BOOKBOT ============",
+        "Analyzing book...",
+        "----------- Word Count ----------",
+        "Found [{n}] total words".format(n = CountWords(s)),
+        "--------- Character Count -------",
+        ('\n'.join([f'{key}: {value}' for key, value in CharCount(s).items()])), #"{dict}".format(dict = CharCount(s)),
+        "============= END ==============="
+    ]
+
+    for line in lines:
+        print(line)
+    
