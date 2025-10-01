@@ -1,22 +1,38 @@
 from pathlib import Path
 import sys
 
+from stats import CountWords
+from stats import CharCount
+
+def FileExists(filepath):
+    my_file = Path(filepath)
+    return my_file.is_file()
+
 # Write a new function called get_book_text. It takes a filepath as input and returns the contents of the file as a string.
 def OpenStringFile(filepath):
-    my_file = Path(filepath)
-    if not my_file.is_file():
-        # print("File does not exist")
-        return "ERROR: File does not exist"
-    
-    
     with open(filepath) as f:
         contents = f.read()
         return contents
-    
+
+
+
 def main():
     if (len(sys.argv) < 2):
         print("USAGE:\npython3 main.py [book.txt]")
         return
-    print(OpenStringFile(sys.argv[1]))
+    
+    filepath = sys.argv[1]
+
+    if not FileExists(filepath):
+        print("ERROR: File does not exist")
+        return
+    
+    s = OpenStringFile(filepath)
+    countMsg = "Found [{n}] total words"
+    print(countMsg.format(n = CountWords(s)))
+
+    print(CharCount(s))
+    
+    #print(s)
     
 main()
